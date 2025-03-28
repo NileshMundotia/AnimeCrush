@@ -1,127 +1,168 @@
 # AnimeCrush
-AnimeCrush is a full-stack web application that allows users to explore, save, and manage their favorite anime characters. The app uses Google OAuth for user authentication and provides a set of RESTful APIs for CRUD operations on anime data. PostgreSQL is used as the database, handling the persistence of users' favorite characters and other related data.
+AnimeCrush is a web application that allows users to search for and explore their favorite anime titles using the Jikan API. Users can register and log in to the site either via local authentication or Google OAuth2. Additionally, users can view detailed information about each anime and watch trailers or videos related to the anime titles.
 
+Table of Contents
 Features
-User Authentication: Google OAuth for secure user login.
 
-Anime Character Management: Users can add, view, update, and remove their favorite anime characters.
+Installation
 
-REST API: Implements a robust RESTful API for CRUD operations.
+Environment Variables
 
-PostgreSQL Integration: Data persistence using PostgreSQL as the relational database.
+API Usage
 
-Responsive Design: User interface built for both desktop and mobile devices.
+Views and Routes
 
-Tech Stack
-Frontend: React.js
-
-Backend: Node.js, Express.js
-
-Database: PostgreSQL
-
-Authentication: Google OAuth 2.0
-
-API: REST API using Express.js
-
-Installation and Setup
-1. Clone the repository:
-bash
-Copy
-Edit
-git clone https://github.com/NileshMundotia/AnimeCrush.git
-cd AnimeCrush
-2. Install dependencies:
-Install backend dependencies:
-
-bash
-Copy
-Edit
-npm install
-Navigate to the client directory and install frontend dependencies:
-
-bash
-Copy
-Edit
-cd client
-npm install
-3. Environment Variables:
-Create a .env file in the root directory with your environment variables for PostgreSQL, Google OAuth, and other configurations.
-
-Example .env file:
-
-bash
-Copy
-Edit
-# PostgreSQL Database Connection
-PGHOST=localhost
-PGUSER=your_db_user
-PGDATABASE=animecrush_db
-PGPASSWORD=your_db_password
-PGPORT=5432
-
-# Google OAuth Credentials
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-
-# Server Configuration
-PORT=5000
-Note: Ensure the .env file is not committed to version control as it contains sensitive information.
-
-4. Setup PostgreSQL Database:
-Before running the app, ensure PostgreSQL is installed and running on your machine. Create the required database and tables.
-
-Create a database in PostgreSQL:
-
-bash
-Copy
-Edit
-createdb animecrush_db
-Run the SQL scripts or migrations to set up your tables.
-
-5. Running the Application:
-Start the backend server:
-
-bash
-Copy
-Edit
-npm start
-Start the frontend React app:
-
-bash
-Copy
-Edit
-cd client
-npm start
-Now, the app should be running on http://localhost:3000.
-
-API Endpoints
-The backend exposes a set of RESTful API endpoints to interact with the PostgreSQL database.
-
-Authentication (Google OAuth)
-POST /auth/google - Handle user login via Google OAuth.
-
-Anime Character API:
-GET /api/anime - Get a list of all anime characters saved by the user.
-
-POST /api/anime - Add a new anime character to the user's favorites.
-
-PUT /api/anime/:id - Update details of a specific anime character.
-
-DELETE /api/anime/:id - Remove an anime character from the user's favorites.
-
-User API:
-GET /api/users - Fetch details about the authenticated user.
-
-Contributing
-Contributions are welcome! Feel free to submit pull requests, report bugs, or suggest new features by opening issues on the GitHub repository.
+Technologies Used
 
 License
-This project is licensed under the MIT License. See the LICENSE file for more details.
 
-Acknowledgements
-Google OAuth for user authentication.
+Features
+User Registration and Authentication:
 
-PostgreSQL for robust database management.
+Users can register an account using their email and password.
 
-The open-source community for tools and libraries used in this project.
+Local login using Passport.js and bcrypt for password hashing.
 
+Google OAuth2 login using Passport.js.
+
+Anime Search:
+
+Search for anime using the Jikan API.
+
+View details about the anime including title, synopsis, and related videos.
+
+Secure Sessions:
+
+Sessions are managed using express-session and stored securely.
+
+Responsive UI:
+
+Clean and minimal design for easy navigation.
+
+Logout Functionality:
+
+Users can log out of their accounts securely.
+
+Installation
+Clone this repository to your local machine:
+
+bash
+Copy
+Edit
+git clone https://github.com/your-username/AnimeCrush.git
+Navigate to the project directory:
+
+bash
+Copy
+Edit
+cd AnimeCrush
+Install the dependencies:
+
+bash
+Copy
+Edit
+npm install
+Set up a PostgreSQL database and create a users table with email and password fields.
+
+Set up your environment variables by creating a .env file in the root directory:
+
+bash
+Copy
+Edit
+touch .env
+Add the following keys to the .env file and replace the values with your own:
+
+pgsql
+Copy
+Edit
+PG_USER=your_postgres_user
+PG_PASSWORD=your_postgres_password
+PG_HOST=localhost
+PG_DATABASE=animecrush
+PG_PORT=5432
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+SESSION_SECRET=your_session_secret
+NODE_ENV=development
+Run the application:
+
+bash
+Copy
+Edit
+npm start
+The server will start at http://localhost:3000.
+
+Environment Variables
+The project requires the following environment variables to be set:
+
+PG_USER: PostgreSQL username
+
+PG_PASSWORD: PostgreSQL password
+
+PG_HOST: PostgreSQL host (usually localhost)
+
+PG_DATABASE: The name of the PostgreSQL database
+
+PG_PORT: The port number of PostgreSQL (usually 5432)
+
+GOOGLE_CLIENT_ID: Your Google OAuth2 client ID
+
+GOOGLE_CLIENT_SECRET: Your Google OAuth2 client secret
+
+SESSION_SECRET: A secret key for session encryption
+
+NODE_ENV: The environment mode (development or production)
+
+API Usage
+AnimeCrush uses the Jikan API to fetch data about anime. The API allows searching for anime based on a query, and returns details like title, synopsis, and more.
+
+Example API call for anime search:
+
+bash
+Copy
+Edit
+GET https://api.jikan.moe/v4/anime?q=<search_query>&limit=15
+Views and Routes
+/: The homepage.
+
+/login: Displays the login page.
+
+/register: Displays the registration page.
+
+/logout: Logs the user out and redirects them to the homepage.
+
+/anime: Displays the anime search page.
+
+/video_playback: Displays the video playback page for selected anime trailers.
+
+/auth/google: Google OAuth2 login route.
+
+/auth/google/secrets: Google OAuth2 callback route.
+
+Technologies Used
+Backend:
+
+Node.js
+
+Express.js
+
+PostgreSQL (pg module for database connection)
+
+Passport.js for authentication (local and Google OAuth2)
+
+Bcrypt for password hashing
+
+Jikan API for anime data
+
+Frontend:
+
+EJS for templating
+
+CSS for styling
+
+Axios for API requests
+
+Morgan for logging HTTP requests
+
+License
+This project is licensed under the MIT License.
