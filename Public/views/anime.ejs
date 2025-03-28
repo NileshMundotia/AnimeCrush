@@ -1,0 +1,40 @@
+<%- include('partials/header', { cssFile: '/CSS/Common/anime.css' }) %>
+
+<h1>Search Anime</h1>
+
+<!-- Search Form -->
+<form action="/search" method="POST">
+    <input type="text" name="query" placeholder="Search for anime" value="<%= query || '' %>" required>
+    <button class="search_btn" type="submit">Search</button>
+</form>
+
+<% if (animeData && animeData.length > 0) { %>
+  <div class="anime-results">
+    <% animeData.forEach(anime => { %>
+      <div class="anime-card">
+        <img src="<%= anime.images.jpg.image_url %>" alt="<%= anime.title %>">
+        <div class="anime-card-content">
+          <h5><%= anime.title %></h5>
+          <% if (anime.synopsis) { %>
+            <p><%= anime.synopsis.substring(0, 100) %>...</p>
+          <% } else { %>
+            <p>No synopsis available.</p>
+          <% } %>
+
+          <!-- Trailer Section -->
+          <% if (anime.trailer && anime.trailer.youtube_id) { %>
+            <a href="https://www.youtube.com/watch?v=<%= anime.trailer.youtube_id %>" class="btn" target="_blank">View Trailer</a>
+          <% } else { %>
+            <p>No trailer available.</p>
+          <% } %>
+
+          <a href="<%= anime.url %>" class="btn">Learn More</a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } else { %>
+  <p>No results found for "<%= query || 'the search term' %>"</p>
+<% } %>
+
+<%- include('partials/footer') %>
