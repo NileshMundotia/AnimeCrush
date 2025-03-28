@@ -1,32 +1,29 @@
-# AnimeCrush
 AnimeCrush
-AnimeCrush is a web application that allows users to explore anime characters, mark them as their favorite, and maintain a personalized list. The app uses Google Authentication for secure login and provides users with the ability to create and manage their anime crushes. It leverages a full-stack setup with React on the frontend and Node.js/Express on the backend, with MongoDB as the database.
+AnimeCrush is a full-stack web application that allows users to explore, save, and manage their favorite anime characters. The app uses Google OAuth for user authentication and provides a set of RESTful APIs for CRUD operations on anime data. PostgreSQL is used as the database, handling the persistence of users' favorite characters and other related data.
 
 Features
-User Authentication: Secure login using Google OAuth.
+User Authentication: Google OAuth for secure user login.
 
-Anime List Management: Add, view, and remove anime characters from your favorites list.
+Anime Character Management: Users can add, view, update, and remove their favorite anime characters.
 
-Responsive UI: Optimized for both desktop and mobile devices.
+REST API: Implements a robust RESTful API for CRUD operations.
 
-CRUD Operations: Create, read, update, and delete favorite anime characters.
+PostgreSQL Integration: Data persistence using PostgreSQL as the relational database.
 
-API Integration: Fetches data dynamically using external APIs.
+Responsive Design: User interface built for both desktop and mobile devices.
 
 Tech Stack
 Frontend: React.js
 
 Backend: Node.js, Express.js
 
-Database: MongoDB
+Database: PostgreSQL
 
 Authentication: Google OAuth 2.0
 
-Version Control: Git & GitHub
+API: REST API using Express.js
 
 Installation and Setup
-To get the application running on your local machine, follow these steps:
-
 1. Clone the repository:
 bash
 Copy
@@ -34,13 +31,13 @@ Edit
 git clone https://github.com/NileshMundotia/AnimeCrush.git
 cd AnimeCrush
 2. Install dependencies:
-Navigate to the root directory and install the backend dependencies:
+Install backend dependencies:
 
 bash
 Copy
 Edit
 npm install
-Navigate to the client directory and install the frontend dependencies:
+Navigate to the client directory and install frontend dependencies:
 
 bash
 Copy
@@ -48,15 +45,19 @@ Edit
 cd client
 npm install
 3. Environment Variables:
-Create a .env file in the root directory. This file will hold your environment variables such as your Google OAuth credentials and MongoDB connection string.
+Create a .env file in the root directory with your environment variables for PostgreSQL, Google OAuth, and other configurations.
 
 Example .env file:
 
 bash
 Copy
 Edit
-# MongoDB
-MONGO_URI=your_mongo_db_connection_string
+# PostgreSQL Database Connection
+PGHOST=localhost
+PGUSER=your_db_user
+PGDATABASE=animecrush_db
+PGPASSWORD=your_db_password
+PGPORT=5432
 
 # Google OAuth Credentials
 GOOGLE_CLIENT_ID=your_google_client_id
@@ -64,42 +65,63 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 # Server Configuration
 PORT=5000
-Note: The .env file is excluded from version control as it contains sensitive information. Make sure not to commit it to GitHub.
+Note: Ensure the .env file is not committed to version control as it contains sensitive information.
 
-4. Running the Application:
+4. Setup PostgreSQL Database:
+Before running the app, ensure PostgreSQL is installed and running on your machine. Create the required database and tables.
+
+Create a database in PostgreSQL:
+
+bash
+Copy
+Edit
+createdb animecrush_db
+Run the SQL scripts or migrations to set up your tables.
+
+5. Running the Application:
 Start the backend server:
 
 bash
 Copy
 Edit
 npm start
-Start the frontend server:
+Start the frontend React app:
 
 bash
 Copy
 Edit
 cd client
 npm start
-The application should now be running locally at http://localhost:3000.
+Now, the app should be running on http://localhost:3000.
 
-Usage
-Once the app is running, you can:
+API Endpoints
+The backend exposes a set of RESTful API endpoints to interact with the PostgreSQL database.
 
-Login using your Google account.
+Authentication (Google OAuth)
+POST /auth/google - Handle user login via Google OAuth.
 
-Browse anime characters and add your favorites to the list.
+Anime Character API:
+GET /api/anime - Get a list of all anime characters saved by the user.
 
-Manage your list, including adding new characters, editing entries, or removing them.
+POST /api/anime - Add a new anime character to the user's favorites.
+
+PUT /api/anime/:id - Update details of a specific anime character.
+
+DELETE /api/anime/:id - Remove an anime character from the user's favorites.
+
+User API:
+GET /api/users - Fetch details about the authenticated user.
 
 Contributing
-Feel free to open issues or submit pull requests if you'd like to contribute to the project. Contributions are welcome and appreciated!
+Contributions are welcome! Feel free to submit pull requests, report bugs, or suggest new features by opening issues on the GitHub repository.
 
 License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
 Acknowledgements
-Google OAuth for authentication.
+Google OAuth for user authentication.
 
-MongoDB for database management.
+PostgreSQL for robust database management.
 
-All contributors and the open-source community for inspiration and support.
+The open-source community for tools and libraries used in this project.
+
