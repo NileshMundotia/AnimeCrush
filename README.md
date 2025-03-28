@@ -1,80 +1,54 @@
 # AnimeCrush
 AnimeCrush is a web application that allows users to search for and explore their favorite anime titles using the Jikan API. Users can register and log in to the site either via local authentication or Google OAuth2. Additionally, users can view detailed information about each anime and watch trailers or videos related to the anime titles.
 
-Table of Contents
-Features
+## Table of Contents
+1. Features
+2. Installation
+3. Environment Variables
+4. API Usage
+5. Views and Routes
+6. Technologies Used
+7. License
 
-Installation
+## Features
+### User Registration and Authentication
+- Users can register an account using their email and password.
+- Local login using Passport.js and bcrypt for password hashing.
+- Google OAuth2 login using Passport.js.
 
-Environment Variables
+### Anime Search
+- Search for anime using the Jikan API.
+- View details about the anime including title, synopsis, and related videos.
 
-API Usage
+### Secure Sessions
+- Sessions are managed using express-session and stored securely.
 
-Views and Routes
+### Responsive UI
+- Clean and minimal design for easy navigation.
 
-Technologies Used
+### Logout Functionality
+- Users can log out of their accounts securely.
 
-License
-
-Features
-User Registration and Authentication:
-
-Users can register an account using their email and password.
-
-Local login using Passport.js and bcrypt for password hashing.
-
-Google OAuth2 login using Passport.js.
-
-Anime Search:
-
-Search for anime using the Jikan API.
-
-View details about the anime including title, synopsis, and related videos.
-
-Secure Sessions:
-
-Sessions are managed using express-session and stored securely.
-
-Responsive UI:
-
-Clean and minimal design for easy navigation.
-
-Logout Functionality:
-
-Users can log out of their accounts securely.
-
-Installation
-Clone this repository to your local machine:
-
-bash
-Copy
-Edit
+## Installation
+1. Clone this repository to your local machine:
+```bash
 git clone https://github.com/your-username/AnimeCrush.git
-Navigate to the project directory:
-
-bash
-Copy
-Edit
+```
+2. Navigate to the project directory:
+```bash
 cd AnimeCrush
-Install the dependencies:
-
-bash
-Copy
-Edit
+```
+3. Install the dependencies:
+```bash
 npm install
-Set up a PostgreSQL database and create a users table with email and password fields.
-
-Set up your environment variables by creating a .env file in the root directory:
-
-bash
-Copy
-Edit
+```
+4. Set up a PostgreSQL database and create a users table with email and password fields.
+5. Set up your environment variables by creating a `.env` file in the root directory:
+```bash
 touch .env
-Add the following keys to the .env file and replace the values with your own:
-
-pgsql
-Copy
-Edit
+```
+6. Add the following keys to the `.env` file and replace the values with your own:
+```
 PG_USER=your_postgres_user
 PG_PASSWORD=your_postgres_password
 PG_HOST=localhost
@@ -84,85 +58,57 @@ GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 SESSION_SECRET=your_session_secret
 NODE_ENV=development
-Run the application:
-
-bash
-Copy
-Edit
+```
+7. Run the application:
+```bash
 npm start
-The server will start at http://localhost:3000.
+```
+The server will start at `http://localhost:3000`.
 
-Environment Variables
+## Environment Variables
 The project requires the following environment variables to be set:
+- `PG_USER`: PostgreSQL username
+- `PG_PASSWORD`: PostgreSQL password
+- `PG_HOST`: PostgreSQL host (usually localhost)
+- `PG_DATABASE`: The name of the PostgreSQL database
+- `PG_PORT`: The port number of PostgreSQL (usually 5432)
+- `GOOGLE_CLIENT_ID`: Your Google OAuth2 client ID
+- `GOOGLE_CLIENT_SECRET`: Your Google OAuth2 client secret
+- `SESSION_SECRET`: A secret key for session encryption
+- `NODE_ENV`: The environment mode (development or production)
 
-PG_USER: PostgreSQL username
-
-PG_PASSWORD: PostgreSQL password
-
-PG_HOST: PostgreSQL host (usually localhost)
-
-PG_DATABASE: The name of the PostgreSQL database
-
-PG_PORT: The port number of PostgreSQL (usually 5432)
-
-GOOGLE_CLIENT_ID: Your Google OAuth2 client ID
-
-GOOGLE_CLIENT_SECRET: Your Google OAuth2 client secret
-
-SESSION_SECRET: A secret key for session encryption
-
-NODE_ENV: The environment mode (development or production)
-
-API Usage
+## API Usage
 AnimeCrush uses the Jikan API to fetch data about anime. The API allows searching for anime based on a query, and returns details like title, synopsis, and more.
 
 Example API call for anime search:
-
-bash
-Copy
-Edit
+```bash
 GET https://api.jikan.moe/v4/anime?q=<search_query>&limit=15
-Views and Routes
-/: The homepage.
+```
 
-/login: Displays the login page.
+## Views and Routes
+- `/`: The homepage.
+- `/login`: Displays the login page.
+- `/register`: Displays the registration page.
+- `/logout`: Logs the user out and redirects them to the homepage.
+- `/anime`: Displays the anime search page.
+- `/video_playback`: Displays the video playback page for selected anime trailers.
+- `/auth/google`: Google OAuth2 login route.
+- `/auth/google/secrets`: Google OAuth2 callback route.
 
-/register: Displays the registration page.
+## Technologies Used
+### Backend
+- Node.js
+- Express.js
+- PostgreSQL (pg module for database connection)
+- Passport.js for authentication (local and Google OAuth2)
+- Bcrypt for password hashing
+- Jikan API for anime data
 
-/logout: Logs the user out and redirects them to the homepage.
+### Frontend
+- EJS for templating
+- CSS for styling
+- Axios for API requests
+- Morgan for logging HTTP requests
 
-/anime: Displays the anime search page.
-
-/video_playback: Displays the video playback page for selected anime trailers.
-
-/auth/google: Google OAuth2 login route.
-
-/auth/google/secrets: Google OAuth2 callback route.
-
-Technologies Used
-Backend:
-
-Node.js
-
-Express.js
-
-PostgreSQL (pg module for database connection)
-
-Passport.js for authentication (local and Google OAuth2)
-
-Bcrypt for password hashing
-
-Jikan API for anime data
-
-Frontend:
-
-EJS for templating
-
-CSS for styling
-
-Axios for API requests
-
-Morgan for logging HTTP requests
-
-License
+## License
 This project is licensed under the MIT License.
