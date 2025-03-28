@@ -1,4 +1,4 @@
-#AnimeCrush
+# AnimeCrush
 AnimeCrush is a full-stack web application that allows users to explore, save, and manage their favorite anime characters. The app uses Google OAuth for user authentication and provides a set of RESTful APIs for CRUD operations on anime data. PostgreSQL is used as the database, handling the persistence of users' favorite characters and other related data.
 
 Features
